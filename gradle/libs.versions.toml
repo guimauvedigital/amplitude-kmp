@@ -1,0 +1,82 @@
+[versions]
+# Kotlin & Gradle
+kotlin = "2.3.0"
+androidGradlePlugin = "8.7.3"
+dokka = "2.0.0"
+ktlint = "12.3.0"
+mavenPublish = "0.33.0"
+
+# Native SDK Dependencies
+amplitudeAndroid = "1.22.4"
+amplitudeSwift = "1.16.2"
+
+# Kotlin Libraries
+coroutines = "1.10.1"
+datetime = "0.6.1"
+composeMultiplatform = "1.7.3"
+
+# AndroidX
+activityCompose = "1.10.0"
+lifecycleViewmodelCompose = "2.8.7"
+lifecycleProcess = "2.8.7"
+
+# Android SDK Versions
+androidCompileSdk = "35"
+androidMinSdk = "21"
+androidTargetSdk = "35"
+
+# iOS Deployment Target
+iosDeploymentTarget = "13.0"
+
+# Testing
+junit = "5.9.3"
+junit4 = "4.13.2"
+mockk = "1.13.13"
+robolectric = "4.15.1"
+testCore = "1.6.1"
+testExtJunit = "1.6.1"
+
+# Java
+jvmTarget = "11"
+
+[libraries]
+# Amplitude Native SDKs
+amplitude-android = { module = "com.amplitude:analytics-android", version.ref = "amplitudeAndroid" }
+
+# Kotlin
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
+
+# AndroidX
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+androidx-lifecycle-viewmodelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+androidx-lifecycle-runtimeCompose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleViewmodelCompose" }
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleProcess" }
+
+# Testing
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params" }
+junit4 = { module = "junit:junit", version.ref = "junit4" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+test-core = { module = "androidx.test:core", version.ref = "testCore" }
+test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "testExtJunit" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

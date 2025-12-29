@@ -1,0 +1,10 @@
+# Amplitude KMP Sample - Local Properties Example
+# Copy this file to local.properties and add your API keys
+# Note: local.properties is gitignored and should NOT be committed
+
+# Android SDK path (if not using ANDROID_SDK_ROOT environment variable)
+# sdk.dir=/path/to/android-sdk
+
+# Amplitude API Key (required)
+# Get your API key from: https://analytics.amplitude.com/
+AMPLITUDE_API_KEY=your_amplitude_api_key_here
