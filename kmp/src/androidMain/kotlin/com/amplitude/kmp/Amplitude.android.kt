@@ -29,15 +29,7 @@ public actual class Amplitude internal constructor(
                 ?: throw IllegalStateException("Amplitude not initialized. Call Amplitude(apiKey, context) first")
         }
 
-        /**
-         * Initialize Amplitude with Configuration.
-         *
-         * Note: The Android SDK's initialization is asynchronous. The instance is returned
-         * immediately, but the internal build process completes in the background.
-         * To ensure the SDK is fully initialized before tracking events, use the suspend
-         * function `awaitInitialization()` or the callback-based `onInitialized()`.
-         */
-        public operator fun invoke(configuration: Configuration): Amplitude {
+        public actual operator fun invoke(configuration: Configuration): Amplitude {
             val androidConfig = configuration.toAndroidConfiguration()
             val androidInstance = AndroidAmplitude(androidConfig)
             return Amplitude(androidInstance).also { _instance = it }

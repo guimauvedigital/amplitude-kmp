@@ -1,12 +1,7 @@
 package com.amplitude.kmp.mappings.ios
 
 import cocoapods.AmplitudeSwift.*
-import com.amplitude.kmp.Configuration
-import com.amplitude.kmp.LogLevel
-import com.amplitude.kmp.ServerZone
-import com.amplitude.kmp.AutocaptureOption
-import com.amplitude.kmp.TrackingOptions
-import com.amplitude.kmp.InteractionsOptions
+import com.amplitude.kmp.*
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSNumber
 
@@ -44,7 +39,7 @@ internal fun Configuration.toIOSConfiguration(): AMPConfiguration {
     config.setMinTimeBetweenSessionsMillis(minTimeBetweenSessionsMillis.toInt().toLong())
     config.setIdentifyBatchIntervalMillis(identifyBatchIntervalMillis.toInt().toLong())
     config.setMigrateLegacyData(migrateLegacyData)
-    offline?.let { config.setOffline(NSNumber(bool = it)) }
+    config.setOffline(NSNumber(bool = offline))
     config.setInteractionsOptions(interactionsOptions.toIOSInteractionsOptions())
 
     return config

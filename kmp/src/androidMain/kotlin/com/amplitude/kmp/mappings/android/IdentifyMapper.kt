@@ -1,7 +1,7 @@
 package com.amplitude.kmp.mappings.android
 
-import com.amplitude.core.events.Identify as AndroidIdentify
 import com.amplitude.kmp.events.Identify
+import com.amplitude.core.events.Identify as AndroidIdentify
 
 /**
  * Map KMP Identify to Android Identify.
@@ -26,7 +26,7 @@ internal fun Identify.toAndroidIdentify(): AndroidIdentify {
                         is String -> androidIdentify.set(key, it)
                         is Map<*, *> -> androidIdentify.set(key, it as Map<String, Any>)
                         is List<*> -> androidIdentify.set(key, it as List<Any>)
-                        else -> androidIdentify.set(key, it as Any)
+                        else -> androidIdentify.set(key, it)
                     }
                 }
             }
@@ -43,7 +43,7 @@ internal fun Identify.toAndroidIdentify(): AndroidIdentify {
                         is String -> androidIdentify.setOnce(key, it)
                         is Map<*, *> -> androidIdentify.setOnce(key, it as Map<String, Any>)
                         is List<*> -> androidIdentify.setOnce(key, it as List<Any>)
-                        else -> androidIdentify.setOnce(key, it as Any)
+                        else -> androidIdentify.setOnce(key, it)
                     }
                 }
             }

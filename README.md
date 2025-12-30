@@ -50,7 +50,7 @@ Add to your `build.gradle.kts`:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("digital.guimauve.amplitude:analytics-kmp:1.0.0")
+            implementation("digital.guimauve.amplitude:analytics-kmp:1.0.1")
         }
     }
 }
@@ -60,7 +60,7 @@ kotlin {
 
 ```kotlin
 dependencies {
-    implementation("digital.guimauve.amplitude:analytics-kmp:1.0.0")
+    implementation("digital.guimauve.amplitude:analytics-kmp:1.0.1")
 }
 ```
 
@@ -442,7 +442,7 @@ class CustomPlugin : Plugin {
 
     override fun execute(event: BaseEvent): BaseEvent? {
         // Enrich event with custom data
-        event.eventProperties?.put("app_version", "1.0.0")
+        event.eventProperties?.put("app_version", "1.0.1")
         event.eventProperties?.put("build_number", "123")
         return event
     }
@@ -578,7 +578,7 @@ The KMP SDK maintains **100% API compatibility** with the Android SDK. Migration
 // implementation("com.amplitude:analytics-android:X.X.X")
 
 // Add KMP SDK
-implementation("digital.guimauve.amplitude:analytics-kmp:1.0.0")
+implementation("digital.guimauve.amplitude:analytics-kmp:1.0.1")
 ```
 
 ### Step 2: Update Imports
