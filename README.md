@@ -1,6 +1,6 @@
 # Amplitude Analytics Kotlin Multiplatform SDK
 
-[![Maven Central](https://img.shields.io/maven-central/v/digital.guimauve.amplitude/analytics-kmp)](https://central.sonatype.com/artifact/digital.guimauve.amplitude/analytics-kmp)
+[![Maven Central](https://img.shields.io/maven-central/v/digital.guimauve.amplitude/analytics-kmp)](https://klibs.io/project/guimauvedigital/amplitude-kmp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Official Kotlin Multiplatform SDK for [Amplitude Analytics](https://amplitude.com).
