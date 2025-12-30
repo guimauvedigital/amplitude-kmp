@@ -1,16 +1,12 @@
 package com.amplitude.kmp
 
-import cocoapods.AmplitudeSwift.Amplitude as IOSAmplitude
-import cocoapods.AmplitudeSwift.*
-import com.amplitude.kmp.events.BaseEvent
-import com.amplitude.kmp.events.EventCallBack
-import com.amplitude.kmp.events.EventOptions
-import com.amplitude.kmp.events.Identify
-import com.amplitude.kmp.events.Revenue
-import com.amplitude.kmp.events.RevenueEvent
-import com.amplitude.kmp.plugins.Plugin
+import cocoapods.AmplitudeSwift.AMPConfiguration
+import cocoapods.AmplitudeSwift.AMPIdentify
+import com.amplitude.kmp.events.*
 import com.amplitude.kmp.mappings.ios.*
+import com.amplitude.kmp.plugins.Plugin
 import kotlinx.cinterop.ExperimentalForeignApi
+import cocoapods.AmplitudeSwift.Amplitude as IOSAmplitude
 
 /**
  * iOS actual implementation of Amplitude SDK.
@@ -30,7 +26,7 @@ import kotlinx.cinterop.ExperimentalForeignApi
  */
 @OptIn(ExperimentalForeignApi::class)
 public actual class Amplitude internal constructor(
-    private val iosAmplitude: IOSAmplitude
+    private val iosAmplitude: IOSAmplitude,
 ) {
     public actual companion object {
         private var _instance: Amplitude? = null
@@ -49,7 +45,7 @@ public actual class Amplitude internal constructor(
         /**
          * Initialize Amplitude with Configuration.
          */
-        public operator fun invoke(configuration: Configuration): Amplitude {
+        public actual operator fun invoke(configuration: Configuration): Amplitude {
             val iosConfig = configuration.toIOSConfiguration()
             val iosInstance = createIOSAmplitudeInstance(iosConfig)
             return Amplitude(iosInstance).also { _instance = it }
@@ -61,7 +57,7 @@ public actual class Amplitude internal constructor(
          */
         public operator fun invoke(
             apiKey: String,
-            configs: Configuration.() -> Unit = {}
+            configs: Configuration.() -> Unit = {},
         ): Amplitude {
             val config = Configuration(apiKey = apiKey)
             configs(config)
@@ -86,7 +82,7 @@ public actual class Amplitude internal constructor(
     public actual fun track(
         event: BaseEvent,
         options: EventOptions?,
-        callback: EventCallBack?
+        callback: EventCallBack?,
     ): Amplitude {
         iosAmplitude.track(
             event = event.toIOSBaseEvent(),
@@ -99,7 +95,7 @@ public actual class Amplitude internal constructor(
     public actual fun track(
         eventType: String,
         eventProperties: Map<String, Any?>?,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         // FIX: Set userId/deviceId on KMP BaseEvent before converting to iOS BaseEvent
         // BaseEvent extends EventOptions, so it has userId and deviceId properties
@@ -130,7 +126,7 @@ public actual class Amplitude internal constructor(
 
     public actual fun identify(
         userProperties: Map<String, Any?>?,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         // Convert map to Identify object
         val identify = AMPIdentify()
@@ -146,7 +142,7 @@ public actual class Amplitude internal constructor(
 
     public actual fun identify(
         identify: Identify,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         iosAmplitude.identify(
             identify = identify.toIOSIdentify(),
@@ -161,7 +157,7 @@ public actual class Amplitude internal constructor(
 
     public actual fun revenue(
         revenue: Revenue,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         iosAmplitude.revenue(
             revenue = revenue.toIOSRevenue(),
@@ -211,7 +207,7 @@ public actual class Amplitude internal constructor(
     public actual fun setGroup(
         groupType: String,
         groupName: String,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         iosAmplitude.setGroup(
             groupType = groupType,
@@ -224,7 +220,7 @@ public actual class Amplitude internal constructor(
     public actual fun setGroup(
         groupType: String,
         groupName: Array<String>,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         // iOS SDK has setGroup(groupType: String, groupName: [String])
         // but cinterop doesn't expose it, so call it with each element
@@ -245,7 +241,7 @@ public actual class Amplitude internal constructor(
         groupType: String,
         groupName: String,
         groupProperties: Map<String, Any?>?,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         // Convert map to Identify object
         val identify = AMPIdentify()
@@ -265,7 +261,7 @@ public actual class Amplitude internal constructor(
         groupType: String,
         groupName: String,
         identify: Identify,
-        options: EventOptions?
+        options: EventOptions?,
     ): Amplitude {
         iosAmplitude.groupIdentify(
             groupType = groupType,

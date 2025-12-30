@@ -1,11 +1,6 @@
 package com.amplitude.kmp
 
-import com.amplitude.kmp.events.BaseEvent
-import com.amplitude.kmp.events.EventCallBack
-import com.amplitude.kmp.events.EventOptions
-import com.amplitude.kmp.events.Identify
-import com.amplitude.kmp.events.Revenue
-import com.amplitude.kmp.events.RevenueEvent
+import com.amplitude.kmp.events.*
 import com.amplitude.kmp.plugins.Plugin
 
 /**
@@ -27,6 +22,16 @@ public expect class Amplitude {
          * Session end event constant
          */
         public val END_SESSION_EVENT: String
+
+        /**
+         * Initialize Amplitude with Configuration.
+         *
+         * Note: The Android SDK's initialization is asynchronous. The instance is returned
+         * immediately, but the internal build process completes in the background.
+         * To ensure the SDK is fully initialized before tracking events, use the suspend
+         * function `awaitInitialization()` or the callback-based `onInitialized()`.
+         */
+        public operator fun invoke(configuration: Configuration): Amplitude
     }
 
     /**
@@ -49,7 +54,7 @@ public expect class Amplitude {
     public fun track(
         event: BaseEvent,
         options: EventOptions? = null,
-        callback: EventCallBack? = null
+        callback: EventCallBack? = null,
     ): Amplitude
 
     /**
@@ -63,7 +68,7 @@ public expect class Amplitude {
     public fun track(
         eventType: String,
         eventProperties: Map<String, Any?>? = null,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     // ========================================
@@ -79,7 +84,7 @@ public expect class Amplitude {
      */
     public fun identify(
         userProperties: Map<String, Any?>?,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     /**
@@ -91,7 +96,7 @@ public expect class Amplitude {
      */
     public fun identify(
         identify: Identify,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     // ========================================
@@ -107,7 +112,7 @@ public expect class Amplitude {
      */
     public fun revenue(
         revenue: Revenue,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     /**
@@ -174,7 +179,7 @@ public expect class Amplitude {
     public fun setGroup(
         groupType: String,
         groupName: String,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     /**
@@ -188,7 +193,7 @@ public expect class Amplitude {
     public fun setGroup(
         groupType: String,
         groupName: Array<String>,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     /**
@@ -204,7 +209,7 @@ public expect class Amplitude {
         groupType: String,
         groupName: String,
         groupProperties: Map<String, Any?>?,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     /**
@@ -220,7 +225,7 @@ public expect class Amplitude {
         groupType: String,
         groupName: String,
         identify: Identify,
-        options: EventOptions? = null
+        options: EventOptions? = null,
     ): Amplitude
 
     // ========================================
