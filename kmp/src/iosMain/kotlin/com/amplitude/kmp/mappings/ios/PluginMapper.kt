@@ -29,21 +29,56 @@ internal fun Plugin.toIOSPlugin(): AMPPlugin {
         if (iosObjCEvent == null) {
             null
         } else {
-            // Create a minimal KMP BaseEvent from the iOS event type
-            // The iOS SDK has already enriched the event with all contextual data
+            // Create KMP BaseEvent from iOS event, copying ALL properties (like Android does)
             val kmpEvent = BaseEvent(
                 eventType = iosObjCEvent.eventType()
-            )
+                // Note: eventProperties, userProperties, etc. are ObjCProperties which can't be easily converted
+                // For plugin execution, we mainly need userId/deviceId which are copied below
+            ).apply {
+                // Copy all EventOptions properties from iOS event to KMP event
+                iosObjCEvent.userId()?.let { this.userId = it }
+                iosObjCEvent.deviceId()?.let { this.deviceId = it }
+                this.timestamp = iosObjCEvent.timestamp().takeIf { it != -1L }
+                this.eventId = iosObjCEvent.eventId().takeIf { it != -1L }
+                this.sessionId = iosObjCEvent.sessionId().takeIf { it != -1L }
+                iosObjCEvent.insertId()?.let { this.insertId = it }
+                this.locationLat = iosObjCEvent.locationLat().takeIf { !it.isNaN() }
+                this.locationLng = iosObjCEvent.locationLng().takeIf { !it.isNaN() }
+                iosObjCEvent.appVersion()?.let { this.appVersion = it }
+                iosObjCEvent.versionName()?.let { this.versionName = it }
+                iosObjCEvent.platform()?.let { this.platform = it }
+                iosObjCEvent.osName()?.let { this.osName = it }
+                iosObjCEvent.osVersion()?.let { this.osVersion = it }
+                iosObjCEvent.deviceBrand()?.let { this.deviceBrand = it }
+                iosObjCEvent.deviceManufacturer()?.let { this.deviceManufacturer = it }
+                iosObjCEvent.deviceModel()?.let { this.deviceModel = it }
+                iosObjCEvent.carrier()?.let { this.carrier = it }
+                iosObjCEvent.country()?.let { this.country = it }
+                iosObjCEvent.region()?.let { this.region = it }
+                iosObjCEvent.city()?.let { this.city = it }
+                iosObjCEvent.dma()?.let { this.dma = it }
+                iosObjCEvent.idfa()?.let { this.idfa = it }
+                iosObjCEvent.idfv()?.let { this.idfv = it }
+                iosObjCEvent.adid()?.let { this.adid = it }
+                iosObjCEvent.language()?.let { this.language = it }
+                iosObjCEvent.library()?.let { this.library = it }
+                iosObjCEvent.ip()?.let { this.ip = it }
+                this.revenue = iosObjCEvent.revenue().takeIf { !it.isNaN() }
+                this.price = iosObjCEvent.price().takeIf { !it.isNaN() }
+                this.quantity = iosObjCEvent.quantity().toInt().takeIf { it != -1 }
+                iosObjCEvent.productId()?.let { this.productId = it }
+                iosObjCEvent.revenueType()?.let { this.revenueType = it }
+                iosObjCEvent.currency()?.let { this.currency = it }
+                iosObjCEvent.partnerId()?.let { this.partnerId = it }
+            }
 
             // Execute KMP plugin - it can modify or drop the event
             val result = kmpPlugin.execute(kmpEvent)
 
             // Convert result back to iOS ObjCBaseEvent (AMPBaseEvent)
             // If plugin returns null, the event is dropped
-            // Otherwise, return a new AMPBaseEvent with the potentially modified eventType
-            result?.let {
-                AMPBaseEvent.initWithEventType(eventType = it.eventType)
-            }
+            // Copy all properties from KMP event back to iOS event (like Android does)
+            result?.toIOSBaseEvent()
         }
     }
 

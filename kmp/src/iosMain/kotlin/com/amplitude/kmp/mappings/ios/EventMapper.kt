@@ -20,29 +20,14 @@ internal fun BaseEvent.toIOSBaseEvent(): AMPBaseEvent {
     // Convert MutableMap<String, Any?> to Map<Any?, Any?> for iOS
     val iosEventProperties: Map<Any?, Any?>? = eventProperties?.toMap()
 
-    // DEBUG: Log what we're creating
-    println("🔍 toIOSBaseEvent - eventType: $eventType")
-    println("🔍 toIOSBaseEvent - userId: $userId")
-    println("🔍 toIOSBaseEvent - deviceId: $deviceId")
-    println("🔍 toIOSBaseEvent - eventProperties: $eventProperties")
-
     val event = AMPBaseEvent(
         eventType = eventType,
         eventProperties = iosEventProperties
     )
 
     // Set EventOptions properties using setters (cinterop requires setter methods)
-    userId?.let {
-        println("🔍 Setting userId: $it")
-        event.setUserId(it)
-        println("🔍 VERIFY after setter - event.userId(): ${event.userId()}")
-    } ?: println("⚠️ userId is null, not setting")
-
-    deviceId?.let {
-        println("🔍 Setting deviceId: $it")
-        event.setDeviceId(it)
-        println("🔍 VERIFY after setter - event.deviceId(): ${event.deviceId()}")
-    } ?: println("⚠️ deviceId is null, not setting")
+    userId?.let { event.setUserId(it) }
+    deviceId?.let { event.setDeviceId(it) }
     timestamp?.let { event.setTimestamp(it) }
     eventId?.let { event.setEventId(it) }
     sessionId?.let { event.setSessionId(it) }
