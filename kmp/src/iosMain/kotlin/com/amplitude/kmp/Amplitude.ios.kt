@@ -88,19 +88,11 @@ public actual class Amplitude internal constructor(
         options: EventOptions?,
         callback: EventCallBack?
     ): Amplitude {
-        println("🔍 [track(BaseEvent)] About to call iosAmplitude.track()")
-        println("🔍 [track(BaseEvent)] KMP event.userId: ${event.userId}")
-        println("🔍 [track(BaseEvent)] KMP event.deviceId: ${event.deviceId}")
-
-        val iosEvent = event.toIOSBaseEvent()
-
-        println("🔍 [track(BaseEvent)] iOS event created, calling iosAmplitude.track()")
         iosAmplitude.track(
-            event = iosEvent,
+            event = event.toIOSBaseEvent(),
             options = options?.toIOSEventOptions(),
             callback = callback?.toIOSCallback()
         )
-        println("🔍 [track(BaseEvent)] iosAmplitude.track() returned")
         return this
     }
 
@@ -190,9 +182,7 @@ public actual class Amplitude internal constructor(
     // ========================================
 
     public actual fun setUserId(userId: String?): Amplitude {
-        println("🔍 iOS setUserId() called with: $userId")
         iosAmplitude.setUserId(userId)
-        println("✅ iOS setUserId() completed - current userId: ${iosAmplitude.getUserId()}")
         return this
     }
 
