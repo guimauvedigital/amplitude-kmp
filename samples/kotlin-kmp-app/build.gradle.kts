@@ -51,7 +51,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             // Amplitude KMP SDK - from Maven Local/Central instead of project dependency
-            implementation("digital.guimauve.amplitude:analytics-kmp:1.0.1")
+            implementation("digital.guimauve.amplitude:analytics-kmp:1.0.2")
 
             // Kotlin libraries
             implementation(libs.kotlinx.datetime)

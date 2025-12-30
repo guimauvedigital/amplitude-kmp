@@ -21,10 +21,7 @@ public actual class Amplitude internal constructor(
         public actual val START_SESSION_EVENT: String = AndroidAmplitude.START_SESSION_EVENT
         public actual val END_SESSION_EVENT: String = AndroidAmplitude.END_SESSION_EVENT
 
-        /**
-         * Get singleton instance.
-         */
-        public fun getInstance(): Amplitude {
+        public actual fun getInstance(): Amplitude {
             return _instance
                 ?: throw IllegalStateException("Amplitude not initialized. Call Amplitude(apiKey, context) first")
         }

@@ -24,6 +24,11 @@ public expect class Amplitude {
         public val END_SESSION_EVENT: String
 
         /**
+         * Get singleton instance.
+         */
+        public fun getInstance(): Amplitude
+
+        /**
          * Initialize Amplitude with Configuration.
          *
          * Note: The Android SDK's initialization is asynchronous. The instance is returned
