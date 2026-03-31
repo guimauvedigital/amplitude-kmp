@@ -4,6 +4,8 @@ import cocoapods.AmplitudeSwift.*
 import com.amplitude.kmp.*
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSNumber
+import platform.Foundation.setValue
+import platform.darwin.NSObject
 
 /**
  * iOS mapping utilities for Configuration.
@@ -29,7 +31,9 @@ internal fun Configuration.toIOSConfiguration(): AMPConfiguration {
     callback?.let { config.setCallback(it.toIOSCallback()) }
     config.setFlushMaxRetries(flushMaxRetries.toLong())
     config.setUseBatch(useBatch)
-    config.setServerZone(serverZone.toIOSServerZone())
+    // AMPServerZone is a Swift-native enum that cinterop can't instantiate directly.
+    // Use KVC to set the NSInteger-backed property by value (US=0, EU=1).
+    (config as NSObject).setValue(NSNumber(long = serverZone.toIOSServerZoneValue()), forKey = "serverZone")
     serverUrl?.let { config.setServerUrl(it) }
     plan?.let { config.setPlan(it.toIOSPlan()) }
     ingestionMetadata?.let { config.setIngestionMetadata(it.toIOSIngestionMetadata()) }
@@ -63,17 +67,13 @@ internal fun LogLevel.toIOSLogLevel(): AMPLogLevel {
 }
 
 /**
- * Map KMP ServerZone to iOS AMPServerZone.
- * Note: Using AMPServerZone from AmplitudeCore (Objective-C enum).
- * Cinterop exposes enums as Long values.
+ * Map KMP ServerZone to its iOS NSInteger value.
+ * AMPServerZone is a Swift-native enum that cinterop can't instantiate directly under Swift 6/Xcode 26.
+ * Returns the raw NSInteger value: US=0, EU=1.
  */
-@OptIn(ExperimentalForeignApi::class)
-@Suppress("DEPRECATION")
-internal fun ServerZone.toIOSServerZone(): AMPServerZone {
-    return when (this) {
-        ServerZone.US -> AMPServerZone.byValue(0L)  // AMPServerZoneUS = 0
-        ServerZone.EU -> AMPServerZone.byValue(1L)  // AMPServerZoneEU = 1
-    }
+internal fun ServerZone.toIOSServerZoneValue(): Long = when (this) {
+    ServerZone.US -> 0L  // AMPServerZoneUS
+    ServerZone.EU -> 1L  // AMPServerZoneEU
 }
 
 /**

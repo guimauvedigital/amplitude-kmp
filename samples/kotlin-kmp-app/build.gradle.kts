@@ -51,7 +51,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             // Amplitude KMP SDK - from Maven Local/Central instead of project dependency
-            implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.2")
+            implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.3")
 
             // Kotlin libraries
             implementation(libs.kotlinx.datetime)
