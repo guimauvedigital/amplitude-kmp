@@ -68,10 +68,11 @@ internal fun LogLevel.toIOSLogLevel(): AMPLogLevel {
  * Cinterop exposes enums as Long values.
  */
 @OptIn(ExperimentalForeignApi::class)
+@Suppress("DEPRECATION")
 internal fun ServerZone.toIOSServerZone(): AMPServerZone {
     return when (this) {
-        ServerZone.US -> AMPServerZoneUS  // US = 0
-        ServerZone.EU -> AMPServerZoneEU  // EU = 1
+        ServerZone.US -> AMPServerZone.byValue(0L)  // AMPServerZoneUS = 0
+        ServerZone.EU -> AMPServerZone.byValue(1L)  // AMPServerZoneEU = 1
     }
 }
 
