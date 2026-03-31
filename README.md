@@ -50,7 +50,7 @@ Add to your `build.gradle.kts`:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.2")
+            implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.3")
         }
     }
 }
@@ -60,7 +60,7 @@ kotlin {
 
 ```kotlin
 dependencies {
-    implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.2")
+    implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.3")
 }
 ```
 
@@ -442,7 +442,7 @@ class CustomPlugin : Plugin {
 
     override fun execute(event: BaseEvent): BaseEvent? {
         // Enrich event with custom data
-        event.eventProperties?.put("app_version", "1.0.2")
+        event.eventProperties?.put("app_version", "1.0.3")
         event.eventProperties?.put("build_number", "123")
         return event
     }
@@ -578,7 +578,7 @@ The KMP SDK maintains **100% API compatibility** with the Android SDK. Migration
 // implementation("com.amplitude:analytics-android:X.X.X")
 
 // Add KMP SDK
-implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.2")
+implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.3")
 ```
 
 ### Step 2: Update Imports

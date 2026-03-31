@@ -33,7 +33,7 @@ kotlin {
 
     // CocoaPods configuration for local Amplitude-Swift SDK
     cocoapods {
-        version = "1.0.2"
+        version = "1.0.3"
         summary = "Amplitude Analytics KMP SDK"
         homepage = "https://github.com/amplitude/amplitude-kmp"
         ios.deploymentTarget = libs.versions.iosDeploymentTarget.get()
