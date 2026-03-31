@@ -1,6 +1,6 @@
 # Amplitude Analytics Kotlin Multiplatform SDK
 
-[![Maven Central](https://img.shields.io/maven-central/v/digital.guimauve.amplitude/analytics-kmp)](https://klibs.io/project/guimauvedigital/amplitude-kmp)
+[![Maven Central](https://img.shields.io/maven-central/v/me.nathanfallet.amplitude/analytics-kmp)](https://klibs.io/project/nathanfallet/amplitude-kmp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Official Kotlin Multiplatform SDK for [Amplitude Analytics](https://amplitude.com).
@@ -50,7 +50,7 @@ Add to your `build.gradle.kts`:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("digital.guimauve.amplitude:analytics-kmp:1.0.2")
+            implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.2")
         }
     }
 }
@@ -60,7 +60,7 @@ kotlin {
 
 ```kotlin
 dependencies {
-    implementation("digital.guimauve.amplitude:analytics-kmp:1.0.2")
+    implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.2")
 }
 ```
 
@@ -578,7 +578,7 @@ The KMP SDK maintains **100% API compatibility** with the Android SDK. Migration
 // implementation("com.amplitude:analytics-android:X.X.X")
 
 // Add KMP SDK
-implementation("digital.guimauve.amplitude:analytics-kmp:1.0.2")
+implementation("me.nathanfallet.amplitude:analytics-kmp:1.0.2")
 ```
 
 ### Step 2: Update Imports
@@ -779,7 +779,7 @@ no code modifications.
 If you encounter **any API differences** after migrating from the Android SDK (beyond the known issues listed in the
 report above), please:
 
-1. **Report it immediately** by [opening an issue](https://github.com/guimauvedigital/amplitude-kmp/issues)
+1. **Report it immediately** by [opening an issue](https://github.com/nathanfallet/amplitude-kmp/issues)
 2. Include:
     - Code that works in Android SDK
     - Code that fails/differs in KMP SDK
@@ -921,7 +921,7 @@ This KMP SDK wraps the following native SDKs for optimal performance:
 
 ## Support
 
-- 🐛 [GitHub Issues](https://github.com/guimauvedigital/amplitude-kmp/issues)
+- 🐛 [GitHub Issues](https://github.com/nathanfallet/amplitude-kmp/issues)
 - 📚 [Amplitude Help Center](https://help.amplitude.com/)
 - 💬 [Community Forum](https://community.amplitude.com/)
 - 📧 [Email Support](mailto:support@amplitude.com)
