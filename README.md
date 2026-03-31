@@ -70,7 +70,7 @@ The KMP SDK wraps the native Amplitude Swift SDK. Add it via SPM in your Xcode p
 
 1. In Xcode: **File → Add Package Dependencies**
 2. Enter: `https://github.com/amplitude/Amplitude-Swift`
-3. Version: 1.16.2 or later
+3. Version: 1.16.2
 
 Then add your Kotlin framework to the Xcode project via Gradle's `embedAndSignAppleFrameworkForXcode` task.
 
