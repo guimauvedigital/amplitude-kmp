@@ -33,7 +33,7 @@ kotlin {
 
     // CocoaPods configuration for local Amplitude-Swift SDK
     cocoapods {
-        version = "1.0.3"
+        version = "1.0.4"
         summary = "Amplitude Analytics KMP SDK"
         homepage = "https://github.com/amplitude/amplitude-kmp"
         ios.deploymentTarget = libs.versions.iosDeploymentTarget.get()
@@ -48,10 +48,11 @@ kotlin {
             source = path(project.rootProject.file("../AmplitudeCore-Swift"))
         }
 
-        // Use official AmplitudeSwift and AnalyticsConnector
-        pod("AnalyticsConnector") {
-            version = "~> 1.3.0"
-        }
+        // AnalyticsConnector is a transitive pod of AmplitudeSwift and is NOT used by this module's
+        // Kotlin (only cocoapods.AmplitudeSwift.* is imported). Declaring the cinterop here duplicates
+        // the AnalyticsConnector symbols with experiment-kmp (which DOES use them) → "symbol multiply
+        // defined" when both are linked. So we don't cinterop it here; consumers that use both libs get
+        // the connector cinterop from experiment-kmp, and the native pod from AmplitudeSwift.
         pod("AmplitudeSwift") {
             version = "~> " + libs.versions.amplitudeSwift.get()
         }
